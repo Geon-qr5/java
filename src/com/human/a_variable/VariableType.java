@@ -85,15 +85,15 @@ public class VariableType {
     public void type6(){
         // 논리 리터럴
         // 참 : true, 거짓 : false
-        boolean res = true;
+        // boolean res = true;
         // ()안의 문장이 참이라면 코드안의 블럭을 실행
         // 10>0
         if(true){
             System.out.println("true");
         }
-        if(false){
-            System.out.println("false");
-        }
+        // if(false){
+        //     System.out.println("false");
+        // }
     }
 
 }

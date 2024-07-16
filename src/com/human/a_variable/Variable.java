@@ -10,7 +10,7 @@ public class Variable {
     public void var3(){
         // 지역변수 : 코드블럭 안에서만 사용 가능한 변수
         // 초기화를 하지 않으면 사용할 수 없다
-        int value;
+        // int value;
         // int res = value + 10;  <- error
         int res1 = x + 10;
         
@@ -47,10 +47,10 @@ public class Variable {
         x = 10;
 
         // 변수 선언과 동시에 대입
-        int y = 20;
+        // int y = 20;
 
         // 여러개의 변수를 한번에 선언
-        int a,b,c;
+        // int a,b,c;
 
         // 값을 대입하지 않고 사용(출력)시 컴파일 오류 발생
         // System.out.println(a);
@@ -71,8 +71,8 @@ public class Variable {
          * 길이의 제한은 없다
          * 저장된 값이 무엇인지 알기 쉽게 이름을 짓도록 한다!
          */
-        int firstname;
-        int firstName;
+        // int firstname;
+        // int firstName;
     }
 
     public void var2(){
