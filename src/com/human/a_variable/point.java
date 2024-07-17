@@ -7,7 +7,9 @@ public class point {
     Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
+        // 생성
         point g = new point();
+        // 사용 - 변수 이름에 점을 찍으면 사용가능한 필드, 메서드 목록이 나옵니다.
         g.getPoint();
     }
 

@@ -17,6 +17,11 @@ public class Bmi {
         System.out.print("키(m) : ");
         height = s.nextDouble();
 
+        if(height >= 100){
+            // 단위변경
+            height = height / 100;
+        }
+
         System.out.print("몸무게(kg) : ");
         weight = s.nextDouble();
 
