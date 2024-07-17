@@ -1,5 +1,6 @@
 package com.human;
 
+import com.human.a_variable.InputOutput;
 import com.human.a_variable.VariableType;
 
 public class A_App {
@@ -16,6 +17,10 @@ public class A_App {
         v.type5();
         System.out.println("================================================");
         v.type6();
+        System.out.println("================================================");
+
+        InputOutput o = new InputOutput();
+        o.print();
     }
 
 }
