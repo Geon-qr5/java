@@ -30,12 +30,13 @@ public class Menu4 {
 
     public void mainMenu() {
         while (true) {
-            System.out.println("==========로그인메뉴===========");
-            System.out.println("XX도서관에 오신것을 환영합니다.");
-            System.out.println("1. 사용자");
-            System.out.println("2. 관리자");
-            System.out.println("0. 종료");
-            System.out.print("번호를 입력해 주세요. : ");
+            System.out.println("<< XX도서관에 오신것을 환영합니다. >>");
+            System.out.println("┌───────로그인메뉴───────┐");
+            System.out.println("│ 1. 사용자              │");
+            System.out.println("│ 2. 관리자              │");
+            System.out.println("│ 0. 종료                │");
+            System.out.println("└────────────────────────┘");
+            System.out.print("※ 번호를 입력해 주세요. : ");
             int logNum = scan.nextInt();
             scan.nextLine();
 
@@ -57,13 +58,14 @@ public class Menu4 {
     }
 
     private void user() {
-        System.out.println("==========사용자메뉴==========");
-            System.out.println("1. 도서대여");
-            System.out.println("2. 도서반납");
-            System.out.println("0. 이전메뉴");
-            System.out.print("번호를 입력해 주세요. : ");
-            int userNum = scan.nextInt();
-            scan.nextLine();
+        System.out.println("┌───────사용자메뉴───────┐");
+        System.out.println("│ 1. 도서대여            │");
+        System.out.println("│ 2. 도서반납            │");
+        System.out.println("│ 0. 이전메뉴            │");
+        System.out.println("└────────────────────────┘");
+        System.out.print("※ 번호를 입력해 주세요. : ");
+        int userNum = scan.nextInt();
+        scan.nextLine();
         switch (userNum) {
             case 1:
                 rentUser();
@@ -72,6 +74,7 @@ public class Menu4 {
                 returnUser();
                 user();
             case 0:
+                backMenu();
                 break;
             default:
                 errorNum();
@@ -81,14 +84,15 @@ public class Menu4 {
     }
 
     private void manager() {
-        System.out.println("==========관리자메뉴==========");
-            System.out.println("1. 도서등록");
-            System.out.println("2. 도서삭제");
-            System.out.println("3. 사용자등록");
-            System.out.println("0. 이전메뉴");
-            System.out.print("번호를 입력해 주세요. : ");
-            int managerNum = scan.nextInt();
-            scan.nextLine();
+        System.out.println("┌───────관리자메뉴───────┐");
+        System.out.println("│ 1. 도서등록            │");
+        System.out.println("│ 2. 도서삭제            │");
+        System.out.println("│ 3. 사용자등록          │");
+        System.out.println("│ 0. 이전메뉴            │");
+        System.out.println("└────────────────────────┘");
+        System.out.print("※ 번호를 입력해 주세요. : ");
+        int managerNum = scan.nextInt();
+        scan.nextLine();
         switch (managerNum) {
             case 1:
                 addManager();
@@ -100,6 +104,7 @@ public class Menu4 {
                 userManager();
                 manager();
             case 0:
+                backMenu();
                 break;
             default:
                 errorNum();
@@ -107,47 +112,61 @@ public class Menu4 {
         }
 
     }
-    
+
+    private void backMenu() {
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
+        System.out.println("이전메뉴로 돌아갑니다.");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
+    }
+
     private void addManager() {
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
         System.out.println("도서등록");
-        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
     }
 
     private void delManager() {
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
         System.out.println("도서삭제");
-        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
     }
 
     private void userManager() {
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
         System.out.println("사용자등록");
-        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
     }
 
     private void rentUser() {
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
         System.out.println("도서대여");
-        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
     }
 
     private void returnUser() {
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
         System.out.println("도서반납");
-        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
     }
 
     private void exit() {
         System.out.print("정말 종료하시겠습니까?(Y/N) : ");
         String exitStr = scan.nextLine();
         if (exitStr.equalsIgnoreCase("Y")) {
-            System.out.println("프로그램을 종료합니다. 감사합니다.");
+            System.out.println("프로그램을 종료합니다.");
+            System.out.println("이용해주셔서 감사합니다.");
             System.exit(-1);
         } else {
-            System.out.println("처음으로 돌아갑니다.");
-            System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+            System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
+            System.out.println("로그인메뉴로 돌아갑니다.");
+            System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
         }
     }
 
     private void errorNum() {
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
         System.out.println("없는 번호입니다. 다시입력해주세요.");
-        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
     }
 
 }
