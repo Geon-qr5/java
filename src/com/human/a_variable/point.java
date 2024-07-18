@@ -59,7 +59,10 @@ public class point {
             if(i==2){
                 break;
             }
-            i = i + 1;
+            // i = i + 1;
+            // 증감연산자를 이용해서 i의 값을 증가 시킴
+            // ++i 먼저 1증가 / i++ 나중에 1증가
+            i++;
 
             System.out.printf("%.0f번째 입력\n", (double) i);
             System.out.println("성적 계산기");
