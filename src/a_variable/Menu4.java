@@ -1,4 +1,4 @@
-package com.human.a_variable;
+package a_variable;
 
 /**
  * 1. 사용자
