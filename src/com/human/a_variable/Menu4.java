@@ -41,17 +41,15 @@ public class Menu4 {
             System.out.print("※ 번호를 입력해 주세요. : ");
             logNum = scan.nextInt();
             scan.nextLine();
+            System.out.println();
 
             switch (logNum) {
                 case 1:
                     user();
-                    break;
                 case 2:
                     manager();
-                    break;
                 case 0:
                     exit();
-                    break;
                 default:
                     errorNum();
                     break;
@@ -70,6 +68,7 @@ public class Menu4 {
         System.out.print("※ 번호를 입력해 주세요. : ");
         userNum = scan.nextInt();
         scan.nextLine();
+        System.out.println();
         
         switch (userNum) {
             case 1:
@@ -100,6 +99,7 @@ public class Menu4 {
         System.out.print("※ 번호를 입력해 주세요. : ");
         managerNum = scan.nextInt();
         scan.nextLine();
+        System.out.println();
 
         switch (managerNum) {
             case 1:
