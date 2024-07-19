@@ -89,4 +89,53 @@ public class Example {
         // System.out.println("2단");
         // System.out.println("2*1=2");
     }
+
+    public void ex01() {
+        int sum = 0;
+
+        for (int i = 1; i <= 100; i++) {
+            if (i % 3 == 0) {
+                sum += i;
+            }
+        }
+        System.out.println(sum);
+    }
+
+    public void ex02() {
+        int i, j;
+        // Math.random()은 0.00000000....1 ~ 0.9999999...을 추출 한다 -> 0과1사이의수
+        // 1~6까지의 정수를 뽑고싶다면 Math.random() * 6 -> 6보다 작은 어떤수 추출
+        // 위 식에서 0~5까지의 수가 나왔으니 +1을 하면 1~6까지의 수가 나온다.
+
+        while (true) {
+            i = (int) (Math.random() * 6 + 1);
+            j = (int) (Math.random() * 6 + 1);
+            if (5 != (i + j)) {
+                System.out.printf("(%d,%d)\n", i, j);
+            } else {
+                System.out.printf("(%d,%d) ", i, j);
+                System.out.println("합이 5가 되었습니다.");
+                break;
+            }
+
+        }
+    }
+
+    public void ex03() {
+        for (int i = 1; i < 5; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int a = 1; a < 5; a++) {
+            for (int b = 3; b >= a; b--) {
+                System.out.print(" ");
+            }
+            for (int c = 1; c <= a; c++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
 }
