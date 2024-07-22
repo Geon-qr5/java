@@ -1,6 +1,7 @@
 package d_array;
 
 import d_array.practice.ArrayEx;
+import d_array.practice.ArrayStringEx;
 
 public class App extends Object {
     public static void main(String[] args) {
@@ -11,11 +12,19 @@ public class App extends Object {
         // System.out.println(ae.toString());
 
         // ae.array1();
-        
+
         // ae.lotto();
         // ae.array_error();
         // ae.lotto1();
         // ae.lotto2();
-        ae.lotto3();
+        // ae.lotto3();
+        ae.lotto4();
+
+        // ArrayStringEx ase = new ArrayStringEx();
+
+        // ase.method1();
+        // ase.method2();
+        // ase.arraycopy();
+        // System.out.println("=========================");
     }
 }
