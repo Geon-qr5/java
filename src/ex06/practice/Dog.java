@@ -21,10 +21,12 @@ public class Dog extends Animal {
         this.weight = weight;
     }
 
+    // 클래스는 추상메서드를 가질 수 없다.
+    // 추상클래스는 추상메서드를 가질 수 있다. = 생성 할 수 없다!
     @Override
     public void speak() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'speak'");
+        // super : 부모멤버에 접근할때 사용하는 키워드
+        System.out.println(super.toString() + "몸무게는 " + weight + "kg입니다.");
     }
 
 }

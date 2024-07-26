@@ -9,7 +9,7 @@ public class Car {
     Tire backRightTire;
 
     // 상수는 모두 대문자로 되어있기 때문에 _를 넣어서 구분
-    public static final String FRONT_LEFT = "1";
+    public static final int FRONT_LEFT = 1;
 
     public Tire getFrontLeftTire() {
         return frontLeftTire;
@@ -24,7 +24,7 @@ public class Car {
     }
 
     // 매개변수의 자동타입변환
-    public Car(Tire t1, Tire t2, Tire t3, Tire t4){
+    public Car(Tire t1, Tire t2, Tire t3, Tire t4) {
         frontLeftTire = t1;
         frontRightTire = t2;
         backLeftTire = t3;

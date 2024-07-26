@@ -32,8 +32,7 @@ public class Cat extends Animal {
 
     @Override
     public void speak() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'speak'");
+        System.out.println(super.toString() + location + "에 서식하며, 색상은 " + color + "입니다.");
     }
 
 }

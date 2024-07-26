@@ -4,21 +4,27 @@ public class Tire {
     public int maxRotation; // 최대회전수
     public int accumulatedRotation; // 누적회전수
     public String location; // 타이어의 위치
-    public String loc;
+    public int loc;
 
     // 초기화
-    public Tire(String loc, int maxRotation) {
+    public Tire(int loc, int maxRotation) {
         this.maxRotation = maxRotation;
         // this.location = location;
         this.loc = loc;
         switch (loc) {
-            case "1":
+            case 1:
                 location = "앞 왼";
                 break;
-        
+
             default:
                 break;
         }
+    }
+
+    // 초기화
+    public Tire(String location, int maxRotation) {
+        this.maxRotation = maxRotation;
+        this.location = location;
     }
 
     /**
@@ -34,7 +40,7 @@ public class Tire {
             System.out.println(location + "타이어 펑크");
             return false;
         } else {
-            System.out.println(location+(maxRotation - accumulatedRotation)+"회");
+            System.out.println(location + (maxRotation - accumulatedRotation) + "회");
             return true;
         }
     }

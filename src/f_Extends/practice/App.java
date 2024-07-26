@@ -10,8 +10,8 @@ public class App {
                     Tire fl = car.backLeftTire;
                     String location = fl.location;
 
-                    car.frontLeftTire = new KumhoTire("왼 앞", 10);
-                    System.out.println("타이어 교체 완료");
+                    car.frontLeftTire = new KumhoTire(car.frontLeftTire.location, 10);
+                    System.out.println(car.frontLeftTire.location + "타이어 교체 완료");
                     break;
                 case 2:
                     car.backLeftTire = new KumhoTire("뒤 왼", 8);
@@ -38,7 +38,7 @@ public class App {
 
         System.out.println("=============================");
         // 한국타이어를 생성
-        KumhoTire hankookTire = new KumhoTire("FL", 10);
+        HankookTire hankookTire = new HankookTire("FL", 10);
         // 한국타이어가 가지고 있는 고유 속성
         hankookTire.speed = 100;
 
