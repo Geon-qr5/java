@@ -9,6 +9,7 @@ public class App {
                 case 1:
                     Tire fl = car.backLeftTire;
                     String location = fl.location;
+                    System.out.println(location);
 
                     car.frontLeftTire = new KumhoTire(car.frontLeftTire.location, 10);
                     System.out.println(car.frontLeftTire.location + "타이어 교체 완료");
@@ -35,6 +36,8 @@ public class App {
         // 매개변수에서도 자동 타입변환이 발생 할 수 있다.
         Car car2 = new Car(new KumhoTire("", 10), new KumhoTire("", 10), new HankookTire("", 10),
         new HankookTire("", 10));
+
+        System.out.println(car2);
 
         System.out.println("=============================");
         // 한국타이어를 생성
@@ -67,6 +70,8 @@ public class App {
             // 원래 타입으로만 변환이 가능
             // 만들어진 타입으로만 변환이 가능하다.
             KumhoTire kumhoTire = (KumhoTire) t;
+
+            System.out.println(kumhoTire);
             
         }
     }

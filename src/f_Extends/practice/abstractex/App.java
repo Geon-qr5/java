@@ -11,6 +11,8 @@ public class App {
         // 타입으로 사용 할 경우, 추상클래스를 상속받아 구현된 객체들이 사용 될 수 있다.
         Phone p = new SmartPhone("김길동");
 
+        System.out.println(p);
+
         sp.turnOn();
         sp.turnOff();
 
