@@ -4,11 +4,21 @@ public class Tire {
     public int maxRotation; // 최대회전수
     public int accumulatedRotation; // 누적회전수
     public String location; // 타이어의 위치
+    public String loc;
 
     // 초기화
-    public Tire(String location, int maxRotation) {
+    public Tire(String loc, int maxRotation) {
         this.maxRotation = maxRotation;
-        this.location = location;
+        // this.location = location;
+        this.loc = loc;
+        switch (loc) {
+            case "1":
+                location = "앞 왼";
+                break;
+        
+            default:
+                break;
+        }
     }
 
     /**

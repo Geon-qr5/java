@@ -1,8 +1,6 @@
 package ex05.practice;
 
-import lombok.Data;
-
-@Data
+// import lombo
 public class Student extends Person {
     private int grade; // 학년 (1,2,3)
     private String major; // 전공 (1:접수, 2:대기, 3:처리완료, 4:실패)
