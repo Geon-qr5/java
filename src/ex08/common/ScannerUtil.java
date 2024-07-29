@@ -1,4 +1,4 @@
-package ex07.common;
+package ex08.common;
 
 import java.util.Scanner;
 

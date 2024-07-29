@@ -1,4 +1,4 @@
-package ex07.practice;
+package ex08.practice;
 
 import lombok.Data;
 
