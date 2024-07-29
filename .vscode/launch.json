@@ -1,0 +1,224 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Bmi",
+            "request": "launch",
+            "mainClass": "a_variable.Bmi",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "CastingExample",
+            "request": "launch",
+            "mainClass": "a_variable.CastingExample",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "CastingExample1",
+            "request": "launch",
+            "mainClass": "a_variable.CastingExample1",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "InputOutput",
+            "request": "launch",
+            "mainClass": "a_variable.InputOutput",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Menu",
+            "request": "launch",
+            "mainClass": "a_variable.Menu",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Menu1",
+            "request": "launch",
+            "mainClass": "a_variable.Menu1",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Menu3",
+            "request": "launch",
+            "mainClass": "a_variable.Menu3",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Menu3_Ex",
+            "request": "launch",
+            "mainClass": "a_variable.Menu3_Ex",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Menu4",
+            "request": "launch",
+            "mainClass": "a_variable.Menu4",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Menu4_T",
+            "request": "launch",
+            "mainClass": "a_variable.Menu4_T",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "WhileExample",
+            "request": "launch",
+            "mainClass": "a_variable.WhileExample",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "point",
+            "request": "launch",
+            "mainClass": "a_variable.point",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "App(1)",
+            "request": "launch",
+            "mainClass": "b_conditional.App",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "SwitchExample",
+            "request": "launch",
+            "mainClass": "b_conditional.practice.SwitchExample",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "App(2)",
+            "request": "launch",
+            "mainClass": "c_operator.App",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "RandomExample",
+            "request": "launch",
+            "mainClass": "c_operator.practice.RandomExample",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "A_App",
+            "request": "launch",
+            "mainClass": "com.human.A_App",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "A_variableApp",
+            "request": "launch",
+            "mainClass": "com.human.A_variableApp",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Application",
+            "request": "launch",
+            "mainClass": "com.human.Application",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "App(3)",
+            "request": "launch",
+            "mainClass": "d_array.App",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "App(4)",
+            "request": "launch",
+            "mainClass": "e_object.App",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Application(1)",
+            "request": "launch",
+            "mainClass": "ex05.Application",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Application(2)",
+            "request": "launch",
+            "mainClass": "ex06.Application",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Application(3)",
+            "request": "launch",
+            "mainClass": "ex07.Application",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "Application(4)",
+            "request": "launch",
+            "mainClass": "f_Extends.Application",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "TypeEx",
+            "request": "launch",
+            "mainClass": "f_Extends.TypeEx",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "SupersonicAirplaneApp",
+            "request": "launch",
+            "mainClass": "f_Extends.airplane.SupersonicAirplaneApp",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "App(5)",
+            "request": "launch",
+            "mainClass": "f_Extends.practice.App",
+            "projectName": "java_daf781a4"
+        },
+        {
+            "type": "java",
+            "name": "App(6)",
+            "request": "launch",
+            "mainClass": "f_Extends.practice.abstractex.App",
+            "projectName": "java_daf781a4"
+        }
+    ]
+}
