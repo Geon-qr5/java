@@ -103,4 +103,4 @@ FROM EMP;
 -- 컬럼명은 직원명, 연봉, 보너스가 포함된 연봉으로 한다.
 
 SELECT EMP_NAME "직원명", SALARY*12 "연봉", (NVL(BONUS,0) * SALARY + SALARY)*12 "보너스가 포함된 연봉"
-FROM EMP; 
+FROM EMP;
