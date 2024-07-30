@@ -6,11 +6,17 @@ import java.util.List;
 import ex08.common.ScannerUtil;
 
 public class Library {
+    // 타입을 미리 지정 하므로써
+    // 꺼낼때 형변환을 할 필요가 없다.
     List<Book> bookList = new ArrayList<Book>();
 
     public Library() {
         // 리스트에 5권의 책을 생성
-        bookList.add(new Book(1, "제목1", "작가1"));
+        // 책을 생성
+        Book book = new Book(1, "제목1", "작가1");
+        // 리스트에 추가
+        bookList.add(book);
+        // 책을 생성과 동시에 리스트에 추가
         bookList.add(new Book(2, "제목2", "작가2"));
         bookList.add(new Book(3, "제목3", "작가3"));
         bookList.add(new Book(4, "제목4", "작가4"));
@@ -21,6 +27,7 @@ public class Library {
 
         while (true) {
             System.out.println("==========================");
+            // 책 목록 출력
             System.out.println(toString());
             System.out.println("==========================");
             System.out.println("1. 도서 대여");
