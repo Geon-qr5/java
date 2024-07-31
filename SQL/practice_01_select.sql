@@ -1,26 +1,56 @@
 -- EMP 테이블에서 부서 코드가 D9와 일치하는 사원들의 모든 컬럼(*) 정보 조회
+SELECT *
+FROM EMP
+WHERE DEPT_CODE = 'D9';
 
  -- 부서테이블의 부서코드가 D9와 일치하는 모든 내용을 조회
+SELECT *
+FROM DEPT
+WHERE DEPT_ID = 'D9';
 
 -- EMP 테이블에서 부서코드가 D9가 아닌 사원들의 사번, 사원명, 부서코드 조회
+SELECT EMP_ID 사번, EMP_NAME 사원명, DEPT_CODE 부서코드
+FROM EMP
+WHERE DEPT_CODE != 'D9';
 
 -- EMP 테이블에서 급여가 400만원 이상인 직원들의 직원명, 부서코드, 급여조회
+SELECT EMP_NAME 직원명, DEPT_CODE 부서코드, to_char(SALARY,'999,999,999') 급여
+FROM EMP
+WHERE SALARY >= 4000000;
 
  ------------------ 실습 문제 -----------------
 -- 1. EMP 테이블에서 재직 중(ENT_YN 컬럼 값이 'N')인 직원들의 사번, 이름, 입사일 조회 
+SELECT EMP_ID 사번, EMP_NAME 이름, HIRE_DATE 입사일
+FROM EMP
+WHERE ENT_YN = 'N';
 
 -- 2. EMP 테이블에서 연봉이 5000만원 이상인 직원의 직원명, 급여, 연봉, 입사일 조회 
 -- 연봉 : (급여 * 보너스율 + 급여) * 12
+SELECT EMP_NAME 직원명, SALARY 급여, (SALARY * NVL(BONUS,0)+SALARY)*12 연봉, HIRE_DATE 입사일
+FROM EMP
+WHERE (SALARY * NVL(BONUS,0)+SALARY)*12 >= 50000000;
 
 -- EMP 테이블에서 부서 코드가 D6이면서 급여가 300만원 이상인
 -- 직원들의 사번, 직원명, 부서 코드, 급여 조회
+SELECT EMP_ID 사번, EMP_NAME 직원명, DEPT_CODE 부서코드, SALARY 급여
+FROM EMP
+WHERE DEPT_CODE = 'D6' AND SALARY >= 3000000;
 
 -- EMP 테이블에서 급여가 400만원 이상 이고, 직급 코드가 J2인 사원의 모든 컬럼 조회
+SELECT *
+FROM EMP
+WHERE SALARY >= 4000000 AND JOB_CODE = 'J2';
 
 -- EMP 테이블에서 급여가 350만원 이상 600만원 이하를 받는 직원의
 -- 사번, 직원명, 부서 코드, 급여 조회
+SELECT EMP_ID 사번, EMP_NAME 직원명, DEPT_CODE 부서코드, SALARY 급여
+FROM EMP
+WHERE SALARY BETWEEN 3500000 AND 6000000;
 
--- emp 테이블에서 입사일 '90/01/01' ~ '01/01/01'd인 사원의 모든 컬럼 조회
+-- emp 테이블에서 입사일 '90/01/01' ~ '01/01/01'인 사원의 모든 컬럼 조회
+SELECT *
+FROM EMP
+WHERE HIRE_DATE BETWEEN '1990/01/01' AND '2001/01/01';
 
 -- EMP 테이블에서 성이 전 씨인 사원의 사원명, 급여, 입사일 조회
 
