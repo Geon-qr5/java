@@ -362,22 +362,34 @@ select bonus
  -- EMP 테이블에서 BONUS로 내림차순 정렬
  -- (단, BONUS 값이 일치할 경우 그때는 SALARY 가지고 오름차순정렬)
  -- 사원명 보너스 급여
- SELECT EMP_NAME 사원명, BONUS 보너스, SALARY 급여
- FROM EMP
- ORDER BY BONUS DESC, SALARY ASC;
+select emp_name 사원명,
+       bonus 보너스,
+       salary 급여
+  from emp
+ order by bonus desc,
+          salary asc;
  -- WHERE 조건절에서는 컬럼의 별칭이나 순서를 사용 할 수 없다!
 
- SELECT EMP_NAME 사원명, BONUS 보너스, SALARY 급여
- FROM EMP
- ORDER BY 2 DESC, 3 ASC;
+select emp_name 사원명,
+       bonus 보너스,
+       salary 급여
+  from emp
+ order by 2 desc,
+          3 asc;
  -- 조회되는 컬럼의 순서
 
- SELECT EMP_NAME 사원명, BONUS 보너스, SALARY 급여
- FROM EMP
- ORDER BY 보너스 DESC, 급여 ASC;
+select emp_name 사원명,
+       bonus 보너스,
+       salary 급여
+  from emp
+ order by 보너스 desc,
+          급여 asc;
  -- 조회되는 컬럼의 별칭
 
- SELECT EMP_NAME 사원명, BONUS 보너스, SALARY 급여
- FROM EMP
- ORDER BY 보너스 DESC NULLS LAST, 급여 ASC;
+select emp_name 사원명,
+       bonus 보너스,
+       salary 급여
+  from emp
+ order by 보너스 desc nulls last,
+          급여 asc;
  -- NULL값을 마지막으로

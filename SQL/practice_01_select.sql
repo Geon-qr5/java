@@ -53,20 +53,34 @@ FROM EMP
 WHERE HIRE_DATE BETWEEN '1990/01/01' AND '2001/01/01';
 
 -- EMP 테이블에서 성이 전 씨인 사원의 사원명, 급여, 입사일 조회
+SELECT EMP_NAME 사원명, SALARY 급여, HIRE_DATE 입사일
+FROM EMP
+WHERE EMP_NAME LIKE '전%';
 
 -- EMP 테이블에서 이름 중에 '하'가 포함된 사원의 사원명, 주민번호, 부서 코드 조회
+SELECT EMP_NAME 사원명, EMP_NO 주민번호, DEPT_CODE 부서코드
+FROM EMP
+WHERE EMP_NAME LIKE '%하%';
 
 -- EMP 테이블에서 전화번호 4번째 자리가 9로 시작하는 사원의
 -- 사번, 사원명, 전화번호, 이메일 조회
+SELECT EMP_ID 사번, EMP_NAME 사원명, PHONE 전화번호, EMAIL 이메일
+FROM EMP
+WHERE PHONE LIKE '___9%';
 
 -- EMP 테이블에서 이메일 중 _ 앞 글자가 3자리인 이메일 주소를 가진 사원의
 -- 사번 사원명, 이메일 조회
+SELECT EMP_ID 사번, EMP_NAME 사원명, EMAIL 이메일
+FROM EMP
+WHERE EMAIL LIKE '___$_%' ESCAPE '$';
 
 -- EMP 테이블에서 김씨 성이 아닌 직원 사번, 사원명, 입사일 조회
+SELECT EMP_ID 사번, EMP_NAME 사원명, HIRE_DATE 입사일
+FROM EMP
+WHERE NOT EMP_NAME LIKE '김%';
 
 ------------------- 실습 문제 -------------------
 -- 1. EMP 테이블에서 전화번호 처음 3자리가 010이 아닌 사원의 이름, 전화번호 조회
-
 -- 2. DEPT 테이블에서 해외영업부에 대한 모든 컬럼 조회
 
 -- 보너스를 받고 있는 사람을 조회
