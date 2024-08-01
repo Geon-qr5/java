@@ -2,7 +2,7 @@ package ex09.practice;
 
 public class Television implements RemoteControl {
 
-    private int volume;
+    // private int volume;
 
     @Override
     public void turnOn() {
@@ -22,7 +22,7 @@ public class Television implements RemoteControl {
         } else if (volume < RemoteControl.MIN_VOLUME) {
             volume = RemoteControl.MIN_VOLUME;
         } else {
-            this.volume = volume;
+            // this.volume = volume;
         }
         System.out.println("현재 볼륨 : " + volume);
     }

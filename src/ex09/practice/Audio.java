@@ -2,7 +2,7 @@ package ex09.practice;
 
 public class Audio implements RemoteControl {
 
-    private int volume;
+    // private int volume;
     
     @Override
     public void turnOn() {
@@ -16,7 +16,7 @@ public class Audio implements RemoteControl {
 
     @Override
     public void setVolume(int volume) {
-        this.volume = volume;
+        // this.volume = volume;
         System.out.println("오디오 볼륨 : "+volume);
     }
 
