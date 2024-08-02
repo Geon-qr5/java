@@ -16,15 +16,14 @@ public class BookDao {
     public static void main(String[] args) {
         BookDao dao = new BookDao();
 
-        for (int i = 0; i<10; i++){
+        for (int i = 0; i < 10; i++) {
             int resInsert = dao.insertBook();
             System.out.println(resInsert + "건 등록되었습니다.");
-            
+
         }
-        
+
         int resDelete = dao.deleteBook("B00214");
         System.out.println(resDelete + "건 삭제되었습니다.");
-        
 
         List<Book> list = dao.getBookList();
         for (Book book : list) {
@@ -34,13 +33,14 @@ public class BookDao {
 
     /**
      * 도서 등록
+     * 
      * @return
      */
     public int insertBook() {
         int res = 0;
 
         String sql = "insert into tb_book (B_NO, TITLE, AUTHOR, P_NO)"
-                    +"VALUES('B'||LPAD(SEQ_TB_BOOK.NEXTVAL,5,'0'),'INSERTBOOK2','삽입테스트2','P00003')";
+                + "VALUES('B'||LPAD(SEQ_TB_BOOK.NEXTVAL,5,'0'),'INSERTBOOK2','삽입테스트2','P00003')";
 
         try (Connection con = ConnectionUtil.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql);) {
@@ -60,7 +60,7 @@ public class BookDao {
      */
     public int deleteBook(String bookNo) {
         int res = 0;
-        String sql = "DELETE TB_BOOK WHERE B_NO = '" + bookNo +"'";
+        String sql = "DELETE TB_BOOK WHERE B_NO = '" + bookNo + "'";
 
         try (Connection con = ConnectionUtil.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql);) {
