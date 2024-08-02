@@ -81,10 +81,23 @@ WHERE NOT EMP_NAME LIKE '김%';
 
 ------------------- 실습 문제 -------------------
 -- 1. EMP 테이블에서 전화번호 처음 3자리가 010이 아닌 사원의 이름, 전화번호 조회
+SELECT      EMP_NAME    이름
+            , PHONE     전화번호
+FROM        EMP
+WHERE NOT   PHONE        LIKE        '010%';
+
 -- 2. DEPT 테이블에서 해외영업부에 대한 모든 컬럼 조회
+SELECT      *
+FROM        DEPT
+WHERE       DEPT_TITLE      LIKE        '해외영업_부';
+
 
 -- 보너스를 받고 있는 사람을 조회
 -- 사원명, 보너스율
+SELECT      EMP_NAME        사원명
+            , BONUS         보너스율
+FROM        EMP
+WHERE       BONUS           IS NOT NULL;
 
 -- 보너스를 받지 못하는 사람 조회
 
