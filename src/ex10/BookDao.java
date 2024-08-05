@@ -34,7 +34,6 @@ public class BookDao {
     /**
      * 도서 등록
      * 
-     * @return
      */
     public int insertBook() {
         int res = 0;
