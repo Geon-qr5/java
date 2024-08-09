@@ -192,11 +192,11 @@ FROM    TB_PROFESSOR;
 -- 나이 계산하기 다시확인필요!!!!!!
 SELECT  나이
 FROM    (
-SELECT  SUBSTR(ENTRANCE_DATE,1,4) - ('19'||SUBSTR(STUDENT_SSN,1,2)) 나이
+SELECT  SUBSTR(ENTRANCE_DATE,1,4) - ('19'||SUBSTR(STUDENT_SSN,1,2)) +1 나이
 FROM    TB_STUDENT
 WHERE   SUBSTR(STUDENT_SSN,8,1) = '1'
 UNION ALL
-SELECT  SUBSTR(ENTRANCE_DATE,1,4) - ('20'||SUBSTR(STUDENT_SSN,1,2)) 나이
+SELECT  SUBSTR(ENTRANCE_DATE,1,4) - ('20'||SUBSTR(STUDENT_SSN,1,2)) +1 나이
 FROM    TB_STUDENT
 WHERE   SUBSTR(STUDENT_SSN,8,1) = '3'
 )
@@ -210,8 +210,13 @@ FROM    TB_STUDENT
 WHERE   AGE > 19;
 
 
+SELECT  STUDENT_NO, STUDENT_NAME
+FROM    TB_STUDENT
+WHERE   MONTHS_BETWEEN(ENTRANCE_DATE, TO_DATE('19'||SUBSTR(STUDENT_SSN,1,6),'YYYY/MM/DD'))/12>19
+AND     MONTHS_BETWEEN(ENTRANCE_DATE, TO_DATE('19'||SUBSTR(STUDENT_SSN,1,6),'YYYY/MM/DD'))/12<=20;
 
-
+SELECT  SUBSTR(STUDENT_SSN,1,6)
+FROM    TB_STUDENT;
 -- T)
 
 -- 입학년도 - 탄생년도
@@ -352,6 +357,19 @@ FROM    TB_STUDENT
 GROUP BY STUDENT_NAME
 HAVING  COUNT(*) > 1;
 
+-- 태영씨 방법)
+WITH    ST      AS (
+        SELECT STUDENT_NAME, STUDENT_NO
+        FROM TB_STUDENT
+        )
+
+SELECT  DISTINCT TB_STUDENT.STUDENT_NAME        
+FROM    TB_STUDENT, ST 
+WHERE   TB_STUDENT.STUDENT_NAME = ST.STUDENT_NAME
+AND     TB_STUDENT.STUDENT_NO != ST.STUDENT_NO
+ORDER BY TB_STUDENT.STUDENT_NAME; 
+
+
 
 -- 15번 // 내일수업때!
 -- 학번이 A112113인 김고운 학생의 년도, 학기 별 평점과 년도 별 누적 평점, 총 평점을 구하는 SQL문을 작성하시오.
@@ -418,6 +436,23 @@ WHERE   SUBSTR(ENTRANCE_DATE,1,4) BETWEEN 1900 AND 1999
 AND     (STUDENT_ADDRESS LIKE '%강원%'
 OR      STUDENT_ADDRESS LIKE '%경기%');
 
+-- T) OR는 묶어야함!
+SELECT STUDENT_NAME "학생이름", STUDENT_NO "학번", STUDENT_ADDRESS "거주지 주소"
+FROM    TB_STUDENT
+WHERE   (
+        STUDENT_ADDRESS LIKE '경기%'
+        OR STUDENT_ADDRESS LIKE '강원%'
+)
+AND NOT STUDENT_NO LIKE 'A%'
+ORDER BY STUDENT_NAME ASC;
+
+--T)2
+SELECT  STUDENT_NAME "학생이름", STUDENT_NO "학번", STUDENT_ADDRESS "거주지 주소"
+FROM    TB_STUDENT
+WHERE   SUBSTR(STUDENT_ADDRESS,1,2)IN('경기','강원')
+AND     STUDENT_NO NOT LIKE 'A%'
+ORDER BY STUDENT_NAME ASC;
+
 
 -- 4번
 -- 현재 법학과 교수 중 가장 나이가 많은 사람부터 이름을 확인할 수 있는 SQL 문장을 작성하시오.
@@ -430,26 +465,51 @@ WHERE   DEPARTMENT_NO = (
     FROM    TB_DEPARTMENT
     WHERE   DEPARTMENT_NAME = '법학과'   
 )
-ORDER BY PROFESSOR_SSN; 
+ORDER BY PROFESSOR_SSN;
 
 
+-- T)
+SELECT  PROFESSOR_NAME
+FROM    TB_PROFESSOR P, TB_DEPARTMENT D
+WHERE   P.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     DEPARTMENT_NAME = '법학과'
+ORDER BY GET_AGE(PROFESSOR_SSN) DESC;
 
+-- T) ANSI
+-- 컬럼명이 동일한 경우, USING 키워드를 이용
+-- USING 키워드 이용시 테이블명을 명시할 경우 오류  / USING은 식별자를 명시 할 수 없다!
+SELECT  PROFESSOR_NAME
+FROM    TB_PROFESSOR P
+JOIN    TB_DEPARTMENT D USING (DEPARTMENT_NO)
+WHERE   DEPARTMENT_NAME = '법학과'
+ORDER BY GET_AGE(PROFESSOR_SSN) DESC;
 
 
 -- 5번 // 이거도 15번과 같은?
 -- 2004년 2학기에 'C3118100' 과목을 수강한 학생들의 학점을 조회하려고 한다. 
 -- 학점이 높은 학생부터 표시하고,
 -- 학점이 같으면 학번이 낮은 학생부터 표시하는 구문을 작성해 보시오.
--- 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔
--- ❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓
-SELECT  *
+
+SELECT  JOIN1.STUDENT_NO, POINT, STUDENT_NAME
 FROM    (
 SELECT  STUDENT_NO, POINT
 FROM    TB_GRADE
 WHERE   CLASS_NO = 'C3118100'
 AND     TERM_NO = '200402'
 ) JOIN1, TB_STUDENT S
-WHERE   JOIN1.STUDENT_NO = S.STUDENT_NO;
+WHERE   JOIN1.STUDENT_NO = S.STUDENT_NO
+ORDER BY POINT DESC, JOIN1.STUDENT_NO;
+
+-- T)
+-- TO_CHAR에서 9는 유효한 숫자만 출력한다.
+-- 9    : 유효한 숫자만 출력
+-- 99   : 2자리 숫자로 표현해야 하지만 한 자리 숫자인 경우 한 자리만 표시
+-- 00   : 한 자리인 경우, 앞에 0을 붙여서 2자리로 출력
+SELECT  STUDENT_NO, TO_CHAR(POINT,'99.99'), TO_CHAR(POINT,'09.9'), TO_CHAR(POINT,'FM99.9')
+FROM    TB_GRADE
+WHERE   TERM_NO = '200402'
+AND     CLASS_NO = 'C3118100'
+ORDER BY POINT DESC, STUDENT_NO ASC;
 
 
 
@@ -485,12 +545,25 @@ FROM    TB_CLASS_PROFESSOR TCP, TB_CLASS C, TB_PROFESSOR P
 WHERE   C.CLASS_NO = TCP.CLASS_NO
 AND     P.PROFESSOR_NO = TCP.PROFESSOR_NO;
 
+
 -- ANSI
 SELECT  CLASS_NAME, PROFESSOR_NAME
 FROM    TB_CLASS_PROFESSOR TCP
 JOIN    TB_CLASS C USING (CLASS_NO)
 JOIN    TB_PROFESSOR P USING (PROFESSOR_NO);
 
+
+--T)
+SELECT  CLASS_NAME, PROFESSOR_NAME
+FROM    TB_CLASS C, TB_PROFESSOR P, TB_CLASS_PROFESSOR CP
+WHERE   C.CLASS_NO = CP.CLASS_NO
+AND     P.PROFESSOR_NO = CP.PROFESSOR_NO;
+
+SELECT SUM(COUNT(*))
+FROM    TB_PROFESSOR P, TB_CLASS_PROFESSOR CP
+WHERE   P.PROFESSOR_NO = CP.PROFESSOR_NO
+GROUP BY P.PROFESSOR_NO
+ORDER BY P.PROFESSOR_NO;
 
 -- 9번
 -- 8번의 결과 중 '인문 사회' 계열에 속한 과목의 교수 이름을 찾으려고 한다.
@@ -504,13 +577,49 @@ AND     P.DEPARTMENT_NO = D.DEPARTMENT_NO
 AND     CATEGORY = '인문사회';
 
 -- ANSI / 같은 컬럼명이 3개 중복인경우 JOIN시 에러날 수 있으니 정확하게 명시할것!(3번째JOIN 확인)
+
 SELECT  CLASS_NAME, PROFESSOR_NAME
 FROM    TB_CLASS_PROFESSOR TCP
 JOIN    TB_CLASS C USING (CLASS_NO)
 JOIN    TB_PROFESSOR P USING (PROFESSOR_NO)
 JOIN    TB_DEPARTMENT D ON (P.DEPARTMENT_NO = D.DEPARTMENT_NO)
 WHERE   CATEGORY = '인문사회';
-                        
+
+
+-- T)
+
+SELECT  D.CATEGORY, CLASS_NAME, PROFESSOR_NAME
+FROM    TB_CLASS C, TB_PROFESSOR P, TB_CLASS_PROFESSOR CP, TB_DEPARTMENT D
+WHERE   C.CLASS_NO = CP.CLASS_NO
+AND     P.PROFESSOR_NO = CP.PROFESSOR_NO
+AND     P.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     D.CATEGORY = '인문사회';
+
+
+-- T) 이름만 조회하고싶다면
+
+SELECT  PROFESSOR_NAME
+FROM    TB_CLASS C, TB_PROFESSOR P, TB_CLASS_PROFESSOR CP, TB_DEPARTMENT D
+WHERE   C.CLASS_NO = CP.CLASS_NO
+AND     P.PROFESSOR_NO = CP.PROFESSOR_NO
+AND     P.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     D.CATEGORY = '인문사회'
+GROUP BY P.PROFESSOR_NO, PROFESSOR_NAME;
+
+--ANSI
+-- TB_CLASS에도 같은 이름의 컬럼이 있으므로 ON절을 이용하여 컬럼을 명시
+-- JOIN시 순서중요!
+-- JOIN 조건은 FK로 지정 - 1:1로 데이터를 조회
+SELECT  PROFESSOR_NAME
+FROM    TB_CLASS C
+JOIN    TB_CLASS_PROFESSOR CP USING (CLASS_NO)
+JOIN    TB_PROFESSOR P USING (PROFESSOR_NO)
+JOIN    TB_DEPARTMENT D ON (P.DEPARTMENT_NO = D.DEPARTMENT_NO)
+WHERE   D.CATEGORY = '인문사회'
+GROUP BY PROFESSOR_NO, PROFESSOR_NAME
+ORDER BY 1;
+
+
 -- 10번
 -- '음악학과' 학생들의 평점을 구하려고 한다. 
 -- 음악학과 학생들의 "학번", "학생 이름", "전체 평점"을 출력하는 SQL 문장을 작성하시오.
@@ -527,6 +636,22 @@ GROUP BY S.STUDENT_NO
 ), TB_STUDENT S
 WHERE SN = S.STUDENT_NO;
 
+-- 방법2
+SELECT  JOIN1.STUDENT_NO, STUDENT_NAME, S
+FROM    (
+SELECT *
+FROM    TB_STUDENT
+WHERE   DEPARTMENT_NO = (
+SELECT  DEPARTMENT_NO
+FROM    TB_DEPARTMENT
+WHERE   DEPARTMENT_NAME = '음악학과')
+) JOIN1,(
+SELECT  STUDENT_NO, ROUND(AVG(POINT),1) S
+FROM    TB_GRADE
+GROUP BY STUDENT_NO
+) JOIN2
+WHERE   JOIN1.STUDENT_NO = JOIN2.STUDENT_NO;
+
 -- 문제이해를 잘못함 실행은 가능;;; / 각 학과의 평균점수를 학생에게 뿌려주는 형태로 잘못 이해
 SELECT  S.STUDENT_NO, S.STUDENT_NAME, "전체 평점"
 FROM    (
@@ -538,6 +663,24 @@ FROM    (
 ) N, TB_DEPARTMENT D, TB_STUDENT S
 WHERE   N."학과명" = D.DEPARTMENT_NAME
 AND     D.DEPARTMENT_NO = S.DEPARTMENT_NO;
+
+-- T)
+SELECT  /*TERM_NO, */S.STUDENT_NO, STUDENT_NAME, ROUND(AVG(POINT),1)
+FROM    TB_STUDENT S, TB_DEPARTMENT D , TB_GRADE G
+WHERE   S.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     S.STUDENT_NO = G.STUDENT_NO
+AND     DEPARTMENT_NAME='음악학과'
+GROUP BY S.STUDENT_NO, STUDENT_NAME
+ORDER BY S.STUDENT_NO;
+
+-- T) ANSI
+SELECT  /*TERM_NO, */STUDENT_NO, STUDENT_NAME, ROUND(AVG(POINT),1)
+FROM    TB_STUDENT S
+JOIN    TB_DEPARTMENT D USING (DEPARTMENT_NO)
+JOIN    TB_GRADE G USING (STUDENT_NO)
+WHERE   DEPARTMENT_NAME='음악학과'
+GROUP BY STUDENT_NO, STUDENT_NAME
+ORDER BY STUDENT_NO;
 
 -- 11번
 -- 학번이 A313047인 학생이 학교에 나오고 있지 않다. 지도 교수에게 내용을 전달하기 위한 
@@ -580,7 +723,7 @@ AND     D.CATEGORY = '예체능';
 -- 단 출력헤더는 "학생이름", "지도교수"로 표시하며 고학번 학생이 먼저 표시되도록 한다.
 -- 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔
 -- 뭔가 이상..
-SELECT  S.STUDENT_NAME, P.PROFESSOR_NAME
+SELECT  S.STUDENT_NAME "학생이름", NVL(P.PROFESSOR_NAME,'지도교수 미지정') "지도교수"
 FROM    TB_DEPARTMENT D, TB_STUDENT S, TB_PROFESSOR P
 WHERE   D.DEPARTMENT_NO = S.DEPARTMENT_NO
 AND     D.DEPARTMENT_NO = P.DEPARTMENT_NO(+)
@@ -597,6 +740,7 @@ FROM    (
         ) JOIN1, TB_STUDENT S, TB_DEPARTMENT D
 WHERE   JOIN1.SN = S.STUDENT_NO
 AND     S.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     S.ABSENCE_YN = 'N'
 AND     AP >= 4.0;
 
 
