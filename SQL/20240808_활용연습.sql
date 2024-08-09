@@ -307,14 +307,31 @@ WHERE   S.STUDENT_NO = G.STUDENT_NO
 AND     S.STUDENT_NO = 'A112113'
 GROUP BY SUBSTR(TERM_NO,1,4);
 
+-- T)
+SELECT  SUBSTR(TERM_NO,1,4) "년도", ROUND(AVG(POINT),1) "년도 별 평점"
+FROM    TB_GRADE G
+WHERE   STUDENT_NO = 'A112113'
+GROUP BY SUBSTR(TERM_NO,1,4)
+ORDER BY 1;
+
+
 -- 13번
 -- 학과 별 휴학생 수를 파악하고자 한다. 학과 번호와 휴학생 수를 표시하는 SQL문장을 작성하시오.
 -- COUNT(DECODE(ABSENCE_YN, 'Y', 1, NULL)) 의 부연설명
 -- 만일 ABSENCE_YN의 값이 'Y'였을 경우 COUNT(1)이 되어 갯수를 세게 되고
 --     ABSENCE_YN의 값이 'Y'가 아니였을 경우 COUNT(NULL)이 되어 갯수를 세지 않게되는 원리!!
 
-SELECT  DEPARTMENT_NO, COUNT(DECODE(ABSENCE_YN, 'Y',1,NULL))
+SELECT  DEPARTMENT_NO "학과 번호"
+        , COUNT(DECODE(ABSENCE_YN, 'Y',1,NULL)) "휴학생의 수"
 FROM    TB_STUDENT
+GROUP BY DEPARTMENT_NO;
+
+-- T) 서브쿼리를 이용하는 경우
+-- 컬럼이나 테이블에 별칭을 주면 기존 이름으로는 사용 할 수 없다
+-- 컬럼명이 동일한 경우, 테이블명을 명시하여야 한다!!
+SELECT  (SELECT DEPARTMENT_NAME FROM TB_DEPARTMENT WHERE DEPARTMENT_NO = S.DEPARTMENT_NO) 학과명
+        , COUNT(DECODE(ABSENCE_YN, 'Y','Y',NULL)) "휴학생의 수"
+FROM    TB_STUDENT S
 GROUP BY DEPARTMENT_NO;
 
 
@@ -325,14 +342,44 @@ SELECT  N, S
 FROM (
         SELECT  STUDENT_NAME N, COUNT(STUDENT_NAME) S
         FROM    TB_STUDENT
-        GROUP BY STUDENT_NAME      
+        GROUP BY STUDENT_NAME
 )
-WHERE NOT S = 1;
+WHERE S > 1;
+
+-- T)
+SELECT  STUDENT_NAME, COUNT(*)
+FROM    TB_STUDENT
+GROUP BY STUDENT_NAME
+HAVING  COUNT(*) > 1;
 
 
 -- 15번 // 내일수업때!
 -- 학번이 A112113인 김고운 학생의 년도, 학기 별 평점과 년도 별 누적 평점, 총 평점을 구하는 SQL문을 작성하시오.
 -- (단, 평점은 소수점 1자리까지만 반올림하여 표시한다.)
+-- 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔
+-- 수업때 확인 해볼것!
+SELECT  TERM_NO
+FROM    TB_GRADE
+WHERE   STUDENT_NO = (
+        SELECT  STUDENT_NO
+        FROM    TB_STUDENT
+        WHERE   STUDENT_NO = 'A112113'        
+)
+GROUP BY ROLLUP(TERM_NO);
+
+-- T)
+SELECT  SUBSTR(TERM_NO,1,4) 년도, SUBSTR(TERM_NO,5,2) 학기, ROUND(AVG(POINT),1) 평점
+FROM    TB_GRADE
+WHERE   STUDENT_NO = 'A112113'
+GROUP BY ROLLUP(SUBSTR(TERM_NO,1,4), SUBSTR(TERM_NO,5,2));
+
+-- T)2
+SELECT  SUBSTR(TERM_NO,1,4) 년도
+        , DECODE(GROUPING(SUBSTR(TERM_NO, 5, 2)),1, '년도별 평점',SUBSTR(TERM_NO,5,2)) 학기, ROUND(AVG(POINT),1) 평점
+FROM    TB_GRADE
+WHERE   STUDENT_NO = 'A112113'
+GROUP BY ROLLUP(SUBSTR(TERM_NO,1,4), SUBSTR(TERM_NO,5,2));
+
 
 
 
@@ -353,6 +400,12 @@ SELECT  STUDENT_NAME, STUDENT_SSN
 FROM    TB_STUDENT
 WHERE   ABSENCE_YN = 'Y'
 ORDER BY STUDENT_SSN DESC;
+
+-- T)
+SELECT  STUDENT_NAME, STUDENT_SSN
+FROM    TB_STUDENT
+WHERE   ABSENCE_YN = 'Y'
+ORDER BY GET_AGE(STUDENT_SSN);
 
 
 -- 3번
@@ -388,7 +441,15 @@ ORDER BY PROFESSOR_SSN;
 -- 학점이 높은 학생부터 표시하고,
 -- 학점이 같으면 학번이 낮은 학생부터 표시하는 구문을 작성해 보시오.
 -- 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔
-
+-- ❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓❓
+SELECT  *
+FROM    (
+SELECT  STUDENT_NO, POINT
+FROM    TB_GRADE
+WHERE   CLASS_NO = 'C3118100'
+AND     TERM_NO = '200402'
+) JOIN1, TB_STUDENT S
+WHERE   JOIN1.STUDENT_NO = S.STUDENT_NO;
 
 
 
@@ -567,6 +628,8 @@ WHERE   STUDENT_NAME = '최경희'
 
 -- 18번
 -- 국어국문학과에서 총점수가 가장 높은 학생의 이름과 학번을 표시하는 SQL문을 작성하시오
+-- 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔
+-- 쌤 쿼리 배워야함!! 내 쿼리는 지저분... 수업할때 확인필요!
 SELECT  *
 FROM(
 SELECT  S.STUDENT_NO SN, SUM(POINT) SP, S.STUDENT_NAME
@@ -599,4 +662,14 @@ GROUP BY S.STUDENT_NO, S.DEPARTMENT_NO)
 -- 평점은 소수점 한자리까지만 반올림하여 표시되도록 한다.
 
 
--- 총급여의 합계, 부서별 급여의 합계, 부서별 직급의 급여의 합계
+SELECT  TB_CLASS.CLASS_NAME "환경조경학과" , ROUND(AVG(POINT),1) "전공평점"
+FROM    TB_GRADE, TB_CLASS
+WHERE   TB_GRADE.CLASS_NO = TB_CLASS.CLASS_NO
+AND     TB_CLASS.CLASS_NO IN (SELECT  CLASS_NO
+FROM    TB_CLASS
+WHERE   DEPARTMENT_NO = (
+        SELECT  DEPARTMENT_NO
+        FROM    TB_DEPARTMENT
+        WHERE   DEPARTMENT_NAME = '환경조경학과'        
+))
+GROUP BY TB_CLASS.CLASS_NAME;
