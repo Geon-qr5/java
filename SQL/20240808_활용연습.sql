@@ -528,18 +528,69 @@ AND     D.DEPARTMENT_NAME = '서반아어학과';
 -- 15번
 -- 휴학생이 아닌 학생 중 평점이 4.0 이상인 학생을 찾아 
 -- 그 학생의 학번, 이름, 학과, 이름, 평점을 출력하는 SQL문을 작성하시오.
-
+SELECT  S.STUDENT_NO, D.DEPARTMENT_NAME, S.STUDENT_NAME, AP
+FROM    (
+        SELECT  STUDENT_NO SN, ROUND(AVG(POINT),1) AP
+        FROM    TB_GRADE
+        GROUP BY STUDENT_NO
+        ) JOIN1, TB_STUDENT S, TB_DEPARTMENT D
+WHERE   JOIN1.SN = S.STUDENT_NO
+AND     S.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     AP >= 4.0;
 
 
 
 -- 16번
 -- 환경조경학과 전공과목들의 과목 별 평점을 파악할 수 있는 SQL 문을 작성하시오.
+SELECT  JOIN1.CM, ROUND(AVG(POINT),1)
+FROM    (
+        SELECT  CLASS_NO CN ,CLASS_NAME CM
+        FROM    TB_CLASS
+        WHERE   DEPARTMENT_NO = (
+                SELECT  DEPARTMENT_NO
+                FROM    TB_DEPARTMENT
+                WHERE   DEPARTMENT_NAME = '환경조경학과'
+        )
+        ) JOIN1, TB_GRADE G
+WHERE   JOIN1.CN = G.CLASS_NO
+GROUP BY JOIN1.CM;
 
 -- 17번
 -- 춘 기술대학교에 다니고 있는 최경희 학생과 같은 과 학생들의 이름과 주소를 출력하는 SQL 문을 작성하시오.
-                       
+SELECT  STUDENT_NAME, STUDENT_ADDRESS
+FROM    TB_STUDENT
+WHERE   DEPARTMENT_NO = (
+SELECT  DEPARTMENT_NO
+FROM    TB_STUDENT
+WHERE   STUDENT_NAME = '최경희'
+);
+
 -- 18번
 -- 국어국문학과에서 총점수가 가장 높은 학생의 이름과 학번을 표시하는 SQL문을 작성하시오
+SELECT  *
+FROM(
+SELECT  S.STUDENT_NO SN, SUM(POINT) SP, S.STUDENT_NAME
+FROM    TB_GRADE G, TB_STUDENT S, TB_DEPARTMENT D
+WHERE   G.STUDENT_NO = S.STUDENT_NO
+AND     S.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     DEPARTMENT_NAME = '국어국문학과'
+GROUP BY S.STUDENT_NO, S.STUDENT_NAME
+ORDER BY SP DESC
+) JOIN1
+WHERE   JOIN1.SP = (
+        SELECT  MAX(SP)
+FROM    (
+SELECT  S.STUDENT_NO SN, SUM(POINT) SP, S.DEPARTMENT_NO
+FROM    TB_GRADE G, TB_STUDENT S, TB_DEPARTMENT D
+WHERE   G.STUDENT_NO = S.STUDENT_NO
+AND     S.DEPARTMENT_NO = D.DEPARTMENT_NO
+AND     DEPARTMENT_NAME = '국어국문학과'
+GROUP BY S.STUDENT_NO, S.DEPARTMENT_NO)
+);
+
+
+
+
 
 -- 19번
 -- 춘 기술대학교의 "환경조경학과"가 속한 같은 계열 학과들의 
