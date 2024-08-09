@@ -599,11 +599,4 @@ GROUP BY S.STUDENT_NO, S.DEPARTMENT_NO)
 -- 평점은 소수점 한자리까지만 반올림하여 표시되도록 한다.
 
 
-with sd as (
-        SELECT substr(term_no,1,4) ST,POINT
-        FROM TB_GRADE
-        WHERE STUDENT_NO = 'A112113' )
-
-SELECT ST, ROUND(AVG(POINT),1)
-FROM SD 
-GROUP BY ST;
+-- 총급여의 합계, 부서별 급여의 합계, 부서별 직급의 급여의 합계
